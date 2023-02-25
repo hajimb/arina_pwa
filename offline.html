@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Arina Jewellery Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- App css -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
+    <link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/app.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
+</head>
+
+<body class="authentication-bg bg-primary authentication-bg-pattern d-flex align-items-center pb-0 vh-100">
+    <div class="account-pages w-100 mt-5 mb-5" style="position:absolute;top:75px !important;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="card mb-0">
+
+                        <div class="card-body p-4">
+
+                            <div class="account-box">
+                                <div class="account-logo-box">
+                                    <div class="text-center">
+                                        <img src="assets/images/logo-dark.png" alt="Arina">
+                                        <p class="mb-0 mt-3">You are Offline</p>
+                                    </div>
+                                </div>
+                                <div class="account-content mt-4">
+                                    <div class="form-group row text-center mt-2">
+                                        <div class="col-12">
+                                            <button class="btn btn-md btn-block btn-warning"
+                                                type="button">Reload</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Manual reload feature.
+        document.querySelector("button").addEventListener("click", () => {
+            window.location.reload();
+        });
+
+        // Listen to changes in the network state, reload when online.
+        // This handles the case when the device is completely offline.
+        window.addEventListener('online', () => {
+            window.location.href= 'login?e=pwa';
+        });
+
+        // Check if the server is responding and reload the page if it is.
+        // This handles the case when the device is online, but the server
+        // is offline or misbehaving.
+        async function checkNetworkAndReload() {
+            try {
+                const response = await fetch('login.php');
+                // Verify we get a valid response from the server
+                if (response.status >= 200 && response.status < 500) {
+                    window.location.href= 'login?e=pwa';
+                    // window.location.reload();
+                    return;
+                }
+            } catch {
+                // Unable to connect to the server, ignore.
+            }
+           // window.setTimeout(checkNetworkAndReload, 2500);
+        }
+
+        checkNetworkAndReload();
+    </script>
+</body>
+
+</html>
