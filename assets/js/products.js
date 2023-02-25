@@ -5,7 +5,7 @@ $(document).ready(function () {
     var x = localStorage.getItem("arina_data");
     if (null !== x) {
         obj = $.parseJSON(x);
-        console.log(obj);
+        // console.log(obj);
         token = obj['token'];
         var rt = loadPageData();
         
@@ -44,18 +44,18 @@ function loadPageData(){
 }
 
 function FillCombo(){
-    console.log(`Fill Combo index`);
+    // console.log(`Fill Combo index`);
     $("#category").empty();
     $("#category").append('<option value="0" selected="selected">Select Category</option>');
     $.each(categories, function(i) {
       var opt = $('<option />');
-      //console.log('inside each :' + this.price);
+    //   console.log('inside each :' + this.price);
       opt.val(categories[i]);
       opt.text(categories[i]);
       $("#category").append(opt);
     });
     // $("#category").selectpicker('refresh');
-    console.log(`Fill Combo ended`);
+    // console.log(`Fill Combo ended`);
     return true;
 }
 
@@ -75,24 +75,24 @@ function loadProducts(flg){
             var images      = value['images'];
             var category    = value['category'];
             
-            console.log('start :'+flag);
+            // console.log('start :'+flag);
             // if(!(category in categories)){
             //     categories[category] = category;
             // }
-            console.log(srh_category, category );
+            // console.log(srh_category, category );
             if(srh_category != 0 && srh_category != category && flg == false){
-                console.log('true');
+                // console.log('true');
                 flag = false;
             }
             if(srh_filter != 0){
                 // flag = false;
-                console.log(srh_filter, srh_min_value, srh_max_value, value[srh_filter] );
+                // console.log(srh_filter, srh_min_value, srh_max_value, value[srh_filter] );
                 if(!(parseFloat(srh_min_value) <= parseFloat(value[srh_filter]) && parseFloat(srh_max_value) >= parseFloat(value[srh_filter])) && flg == false ){
-                    console.log('true');
+                    // console.log('true');
                     flag = false;
                 }
             }
-            console.log('end :'+flag);
+            // console.log('end :'+flag);
             if(flag){
                 cnt++;
                 var carousel_indicators = '';
