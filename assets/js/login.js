@@ -16,7 +16,7 @@ $(document).ready(function () {
                 var response = resData;
                 if(response['validate'] === true){
                     if(response['status'] == true){
-                        console.log(response['data']);
+                        // console.log(response['data']);
                         localStorage.setItem("arina_data", JSON.stringify(response['data']));
                         window.location = 'dashboard'; 
                     }
@@ -48,7 +48,7 @@ $(document).on('click',"#LoginButton",function () {
             var response = resData;
             if(response['validate'] === true){
                 if(response['status'] == true){
-                    console.log(response['data']);
+                    // console.log(response['data']);
                     localStorage.setItem("arina_data", JSON.stringify(response['data']));
                     toaster(response['message'], 'Success', 'success');
                     $('input[type=text]').val('');

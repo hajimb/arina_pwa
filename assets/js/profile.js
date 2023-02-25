@@ -7,7 +7,7 @@ $(document).ready(function () {
     var x = localStorage.getItem("arina_data");
     if (null !== x) {
         obj = $.parseJSON(x);
-        console.log(obj);
+        // console.log(obj);
         token = obj['token'];
         var rt = loadPageData();
         
@@ -49,7 +49,7 @@ function loadPageData(){
           if (response['validate'] === true) {
               if (response['status'] == true) {
                   var data = response['data'][0];
-                  console.log(data);
+                  // console.log(data);
                   // Profile Header //
 
                   var image_path = profile_data['customer_image_path'];

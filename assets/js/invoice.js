@@ -4,7 +4,7 @@ $(document).ready(function () {
     var x = localStorage.getItem("arina_data");
     if (null !== x) {
         obj = $.parseJSON(x);
-        console.log(obj);
+        // console.log(obj);
         token = obj['token'];
         calllist()
         
@@ -66,7 +66,7 @@ $(document).on('click', ".btn_orders", function () {
         cache: false,
         success: function (resData) {
             var response = resData;
-            console.log(response);
+            // console.log(response);
             $(".btn").prop('disabled', false);
             $("#OrderDetailsModal").modal('show');
             if (response['validate'] === true) {

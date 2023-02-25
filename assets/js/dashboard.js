@@ -3,7 +3,7 @@ $(document).ready(function () {
     var x = localStorage.getItem("arina_data");
     if (null !== x) {
         obj = $.parseJSON(x);
-        console.log(obj);
+        // console.log(obj);
         token = obj['token'];
         // $("#loader-wrapper").hide();
         loaddashboard();
@@ -44,7 +44,7 @@ function loaddashboard(){
                     $("#db_company_logo").attr("src", photo_url);
 
                     // panel Boxes
-                    console.log(data['total_order']);
+                    // console.log(data['total_order']);
                     $("#db_total_order").html(data['total_order']);
                     $("#db_pending_order").html(data['pending_order']);
                     $("#db_pending_amount").html(data['pending_amount']);
