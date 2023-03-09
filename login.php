@@ -69,6 +69,7 @@
                                         <div class="col-12">
                                             <label for="password">Password</label>
                                             <input class="form-control" type="password"  id="password" name="password" placeholder="Enter your password">
+                                            <input type="hidden" name="fcm" id="fcm" value="">
                                         </div>
                                     </div>
                                     <div class="form-group row">

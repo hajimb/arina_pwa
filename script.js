@@ -18,6 +18,7 @@ if ('serviceWorker' in navigator) {
         messaging.getToken()
           .then((fcmToken) => {
             console.log(fcmToken)
+            localStorage.setItem("arina_fcm", fcmToken);
             messaging.onMessage((payload) => {
               console.log("onMessage event fired", payload)
             })

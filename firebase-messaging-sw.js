@@ -1,14 +1,13 @@
 importScripts('https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/8.1.1/firebase-messaging.js');
 var firebaseConfig = {
-    apiKey: "AIzaSyCBJ20nvuqrCLSewKt3T805-DPA_c1-88s",
-    authDomain: "pwa-arina.firebaseapp.com",
-    projectId: "pwa-arina",
-    storageBucket: "pwa-arina.appspot.com",
-    messagingSenderId: "446943933151",
-    appId: "1:446943933151:web:175eb95b1097d127b12f6a",
-    measurementId: "G-1NEQ5Q757V"
-
+    apiKey: "AIzaSyCrpjnrq8dLYbGf2ZncW23-q7cV__sdmlM",
+    authDomain: "arin-pwa-app.firebaseapp.com",
+    projectId: "arin-pwa-app",
+    storageBucket: "arin-pwa-app.appspot.com",
+    messagingSenderId: "25965293200",
+    appId: "1:25965293200:web:5883628f4864fb021e7215",
+    measurementId: "G-7JNYFNXCR4"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);

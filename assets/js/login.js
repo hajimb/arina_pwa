@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    var fcm = localStorage.getItem("arina_fcm");
+    if(null === fcm){
+        fcm = '';
+    }
     var x = localStorage.getItem("arina_data");
     if(null !== x){
         obj = $.parseJSON(x);
@@ -7,6 +11,7 @@ $(document).ready(function () {
         $.ajax({
             type    : 'post',
             url     : url,
+            data: {fcm : fcm},
             headers: { 'Authorization': token },
             processData: false,  // Important!
             contentType:"application/json; charset=utf-8",
@@ -32,10 +37,18 @@ $(document).ready(function () {
 });
 
 $(document).on('click',"#LoginButton",function () { 
+    var fcm = localStorage.getItem("arina_fcm");
+    if(null === fcm){
+        fcm = '';
+    }
+    $("#fcm").val(fcm);
     $(".btn").prop('disabled',true);
     $("#msgbox").show();
     var url = api_url+'v2/login';
     var formdata = $("#loginform").serializeToJSON();
+    // formdata.fcm = 'fsdfdsfadsfds';
+    console.log(formdata);
+    // return false;
 	$.ajax({
         type    : 'post',
         url     : url,
