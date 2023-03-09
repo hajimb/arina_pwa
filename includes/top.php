@@ -42,9 +42,58 @@
         </style>
     <?php } ?>
 
+    <!--  Firebase  -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-messaging.js"></script>
+
 </head>
 <?php if($pagename=="login"){ ?>
 <body class="authentication-bg bg-primary authentication-bg-pattern d-flex align-items-center pb-0 vh-100">
+    <!--  Firebase  -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-messaging.js"></script>
+
+    <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyCBJ20nvuqrCLSewKt3T805-DPA_c1-88s",
+        authDomain: "pwa-arina.firebaseapp.com",
+        projectId: "pwa-arina",
+        storageBucket: "pwa-arina.appspot.com",
+        messagingSenderId: "446943933151",
+        appId: "1:446943933151:web:175eb95b1097d127b12f6a",
+        measurementId: "G-1NEQ5Q757V"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+//     if ('serviceWorker' in navigator) {
+//   const messaging = firebase.messaging()
+//   navigator.serviceWorker.register('firebase-messaging-sw.js')
+//     .then((register) => {
+//       messaging.requestPermission().then(() => {
+//         messaging.getToken()
+//           .then((fcmToken) => {
+//             console.log(fcmToken)
+//             messaging.onMessage((payload) => {
+//               console.log("onMessage event fired", payload)
+//             })
+//           });
+//       });
+//     })
+// } else {
+//   console.log('Service Worker not supported')
+// }
+</script>
 <?php }else{ ?>
 <body data-layout="horizontal" cz-shortcut-listen="true">
 <?php } ?>

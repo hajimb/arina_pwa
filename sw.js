@@ -1,4 +1,5 @@
-// Files to cache
+// Files to cache 
+// To update App, Add Version in CacheName  
 const cacheName = 'arina_cache_v1_1';
 const OFFLINE_URL = "offline.html";
 const appShellFiles = [

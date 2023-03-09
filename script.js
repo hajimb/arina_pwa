@@ -1,7 +1,7 @@
 let dismissButton = document.getElementById("dismiss");
 
-dismissButton.addEventListener("click", function() {
-	document.getElementById("topnav").style.display = "none";
+dismissButton.addEventListener("click", function () {
+  document.getElementById("topnav").style.display = "none";
 });
 
 // Register service worker to control making site work offlin
@@ -10,8 +10,41 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker
     .register('sw.js')
     .then(() => { console.log('Service Worker Registered'); });
-}
 
+  const messaging = firebase.messaging()
+  navigator.serviceWorker.register('firebase-messaging-sw.js')
+    .then((register) => {
+      messaging.requestPermission().then(() => {
+        messaging.getToken()
+          .then((fcmToken) => {
+            console.log(fcmToken)
+            messaging.onMessage((payload) => {
+              console.log("onMessage event fired", payload)
+            })
+          });
+      });
+    })
+} else {
+  console.log('Service Worker not supported')
+}
+/*
+if ('serviceWorker' in navigator) {
+  const messaging = firebase.messaging()
+  navigator.serviceWorker.register('firebase-messaging-sw.js')
+    .then((register) => {
+      messaging.requestPermission().then(() => {
+        messaging.getToken()
+          .then((fcmToken) => {
+            console.log(fcmToken)
+            messaging.onMessage((payload) => {
+              console.log("onMessage event fired", payload)
+            })
+          });
+      });
+    })
+} else {
+  console.log('Service Worker not supported')
+}*/
 // Code to handle install prompt on desktop
 
 let deferredPrompt;
@@ -21,14 +54,14 @@ const adddiv = document.querySelector('.adddiv');
 adddiv.style.display = 'none';
 
 window.addEventListener('beforeinstallprompt', (e) => {
-    console.log('beforeinstallprompt called');
+  console.log('beforeinstallprompt called');
   // Prevent Chrome 67 and earlier from automatically showing the prompt
   e.preventDefault();
-    console.log('preventDefault called');
+  console.log('preventDefault called');
   // Stash the event so it can be triggered later.
   deferredPrompt = e;
-    console.log('defereed prompt called');
-  
+  console.log('defereed prompt called');
+
   // Update UI to notify the user they can add to home screen
   adddiv.style.display = 'block';
   console.log('div block');
