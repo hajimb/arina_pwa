@@ -1,5 +1,5 @@
 // Files to cache
-const cacheName = 'arina_cache';
+const cacheName = 'arina_cache_v1_1';
 const OFFLINE_URL = "offline.html";
 const appShellFiles = [
   'assets/css/bootstrap.css',
