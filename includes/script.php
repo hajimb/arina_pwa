@@ -1,35 +1,35 @@
 
     <!-- Vendor js -->
-    <script src="assets/js/vendor.min.js"></script>
+    <script src="assets/js/vendor.min.js?i=<?= time();?>"></script>
 
     <!-- App js -->
-    <script src="assets/js/app.js"></script>
+    <script src="assets/js/app.js?i=<?= time();?>"></script>
     
     <!-- LightBox js -->
-    <script src="assets/libs/lightbox2/lightbox.min.js"></script>
-    <script src="assets/js/jquery.serializeToJSON.js"></script>
-    <script src="assets/libs/jquery-toast/jquery.toast.min.js"></script>
+    <script src="assets/libs/lightbox2/lightbox.min.js?i=<?= time();?>"></script>
+    <script src="assets/js/jquery.serializeToJSON.js?i=<?= time();?>"></script>
+    <script src="assets/libs/jquery-toast/jquery.toast.min.js?i=<?= time();?>"></script>
     <script src="assets/js/common.js?i=<?= time();?>"></script>
 
     <!-- Required datatable js -->
-    <script src="assets/libs/datatables/jquery.dataTables.min.js"></script>
-    <script src="assets/libs/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="assets/js/moment.js"></script>
+    <script src="assets/libs/datatables/jquery.dataTables.min.js?i=<?= time();?>"></script>
+    <script src="assets/libs/datatables/dataTables.bootstrap4.min.js?i=<?= time();?>"></script>
+    <script src="assets/js/moment.js?i=<?= time();?>"></script>
 
     <!-- Responsive Table js -->
-    <!-- <script src="assets/libs/rwd-table/rwd-table.min.js"></script> -->
+    <!-- <script src="assets/libs/rwd-table/rwd-table.min.js?i=<?= time();?>"></script> -->
     
 <?php if($pagename == "catalog"){ ?>
-      <script type="text/javascript" src="assets/js/dataTables.checkboxes.min.js"></script>
+      <script type="text/javascript" src="assets/js/dataTables.checkboxes.min.js?i=<?= time();?>"></script>
 <?php } if($pagename == "custom_design"){ ?>
-      <script type="text/javascript" src="assets/libs/dropzone/dropzone.min.js"></script>
-      <script type="text/javascript" src="assets/js/jquery.repeater.min.js"></script>
+      <script type="text/javascript" src="assets/libs/dropzone/dropzone.min.js?i=<?= time();?>"></script>
+      <script type="text/javascript" src="assets/js/jquery.repeater.min.js?i=<?= time();?>"></script>
 <?php } if($pagename == "dashboard") {?>
     <!-- Sparkline charts -->
-    <script src="assets/libs/jquery-sparkline/jquery.sparkline.min.js"></script>
-    <script src="assets/js/pages/profile.init.js"></script>
+    <script src="assets/libs/jquery-sparkline/jquery.sparkline.min.js?i=<?= time();?>"></script>
+    <script src="assets/js/pages/profile.init.js?i=<?= time();?>"></script>
 <?php }else if($pagename == "login"){ ?>
-    <script src="script.js"></script>
+    <script src="script.js?i=<?= time();?>"></script>
 <?php }else if($pagename == "profile"){ ?>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCunoKdw5Q4F_XWdetqy7JhmrZWpinb4zQ&callback=initMap&libraries=&v=weekly" defer></script>
