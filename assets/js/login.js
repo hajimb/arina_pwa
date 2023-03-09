@@ -3,7 +3,7 @@ $(document).ready(function () {
     if(null !== x){
         obj = $.parseJSON(x);
         var token = obj['token'];
-        var url = api_url+'v1/check_session';
+        var url = api_url+'v2/check_session';
         $.ajax({
             type    : 'post',
             url     : url,
@@ -34,7 +34,7 @@ $(document).ready(function () {
 $(document).on('click',"#LoginButton",function () { 
     $(".btn").prop('disabled',true);
     $("#msgbox").show();
-    var url = api_url+'v1/login';
+    var url = api_url+'v2/login';
     var formdata = $("#loginform").serializeToJSON();
 	$.ajax({
         type    : 'post',

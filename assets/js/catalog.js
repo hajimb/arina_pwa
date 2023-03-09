@@ -2,6 +2,7 @@ var token ;
 var categories = {};
 var products ;
 var table;
+
 var selectedIds = [];
 $(document).ready(function () {
     var x = localStorage.getItem("arina_data");
@@ -9,10 +10,10 @@ $(document).ready(function () {
         obj = $.parseJSON(x);
         // console.log(obj);
         token = obj['token'];
+        $("#user_id").val(obj['id']);
         calllist();
         // console.log(table)
         loadPageData(true);
-        
     } else {
         window.location = 'login';
     }
@@ -97,89 +98,83 @@ function FillCombo(){
 $(document).on('click', "#save_pdf", function () {
     var rowcollection = table.$(".dt-checkboxes:checked", {"page": "all"});
     selectedIds = [];
+    // selectedIds = '';
     var cnt = 0;
     rowcollection.each(function(index,elem){
         var $row            = $(elem).closest('tr');
         var $columns        = $row.find('td');
         var id              = $columns[8].innerHTML;
         // var res = course.split(",");
-        // console.log(cnt, id); 
+        // console.log(cnt, id);
+        
+        // selectedIds = selectedIds + id + ','; 
         selectedIds.push(id); 
         cnt++; 
     });
     if(cnt == 0){
         toaster('Please select alteast 1 Design', 'Error', 'error');
     }else{
-        $("#design_id").val(JSON.stringify(selectedIds));
+        
+        // var res = selectedIds.toString();
+        // console.log(res);
+        // return false;
+        $("#design_id").val(selectedIds.toString());
         $(".btn").prop('disabled', true);
         var url = api_url + 'v2/catalogpdf';
-        var formdata = $("#orderform").serializeToJSON();
-        $.ajax({
-            type: 'post',
-            url: url,
-            headers: { 'Authorization': token },
-            data: formdata,
-            processData: false,  // Important!
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            cache: false,
-            success: function (resData) {
-                var response = resData;
-                // console.log(response);
-                return false;
-                $(".btn").prop('disabled', false);
-                $("#OrderDetailsModal").modal('show');
-                if (response['validate'] === true) {
-                    if (response['status'] == true) {
-                        var latest_design = response['data']['items'];
-                        var total_amount = response['data']['total_amount'];
-    
-                        if (latest_design != null) {
-                            var image_path = profile_data['product_image_path'];
-                            var imagestr = '';
-                            var cnt = 1;
-                            $.each(latest_design, function (index, value) {
-                                var img = image_path + value['image'];
-                                imagestr = imagestr + `<tr>
-                                                            <td><a href='${img}' data-lightbox='#single-image-${cnt}'><img id='single-image-${cnt}' alt='${value['style_no']}' src='${img}' class='nav-design'></a></td>
-                                                            <td>${value['title']}</td>
-                                                            <td>${value['style_no']}</td>
-                                                            <td class="text-right">${value['rate']}</td>
-                                                            <td class="text-center">${value['quantity']}</td>
-                                                            <td class="text-right">${value['total_amount']}</td>
-                                                        </tr>`;
-                                cnt++;
-    
-                            });
-                            $("#dv_order_details").html(imagestr);
-                            $("#grandtotal").html(total_amount.toFixed(2));
-                            $("#order_number").html(order_number);
-                        }
-    
-                    } else if (response['status'] == false) {
-                        toaster(response['message'], 'Error', 'error');
-                        return false;
-                    }
-                } else {
-                    $.each(response['message'], function (key, value) {
-                        if (value != '') {
-                            toaster(value, 'Error', 'error');
-                            $("#" + key).focus();
-                            $(".btn").prop('disabled', false);
-                            return false;
-                        }
-                    });
-                }
-            },
-            error: function (xhr, status, error) {
-                var errorMessage = xhr.status + ': ' + xhr.statusText
-                if (xhr.status = 409) {
-                    errorMessage = xhr.responseJSON.message;
-                }
-                toaster(errorMessage, 'Error', 'error');
-                $(".btn").prop('disabled', false);
-            }
-        });
+        $('#orderform').attr('action',url);
+        $('#orderform').submit();
+        $(".btn").prop('disabled', false);
+        
+        // var formdata = $("#orderform").serializeToJSON();
+        // console.log(formdata);
+        // $.ajax({
+        //     type: 'post',
+        //     url: url,
+        //     headers: { 'Authorization': token },
+        //     data: formdata,
+        //     processData: false,  // Important!
+        //     contentType: "application/json; charset=utf-8",
+        //     dataType: "json",
+        //     cache: false,
+        //     xhr: function () {
+        //         var xhr = new XMLHttpRequest();
+        //         xhr.onreadystatechange = function () {
+        //             if (xhr.readyState == 2) {
+        //                 if (xhr.status == 200) {
+        //                     xhr.responseType = "blob";
+        //                 } else {
+        //                     xhr.responseType = "text";
+        //                 }
+        //             }
+        //         };
+        //         return xhr;
+        //     },
+        //     success: function (data) {
+        //         //Convert the Byte Data to BLOB object.
+        //         var blob = new Blob([data], { type: "application/octetstream" });
+ 
+        //         //Check the Browser type and download the File.
+        //         var isIE = false || !!document.documentMode;
+        //         if (isIE) {
+        //             window.navigator.msSaveBlob(blob, fileName);
+        //         } else {
+        //             var url = window.URL || window.webkitURL;
+        //             link = url.createObjectURL(blob);
+        //             var a = $("<a />");
+        //             a.attr("download", fileName);
+        //             a.attr("href", link);
+        //             $("body").append(a);
+        //             a[0].click();
+        //             $("body").remove(a);
+        //         }
+        //         $(".btn").prop('disabled', false);
+        //     },
+        //     error: function (xhr, status, error) {
+        //         var errorMessage = xhr.status + ': ' + xhr.statusText
+        //         toaster(errorMessage, 'Error', 'error');
+        //         $(".btn").prop('disabled', false);
+        //     }
+        // });
     }
     // console.log(rows_selected.join(","));
 });

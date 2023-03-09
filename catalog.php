@@ -44,6 +44,7 @@
                                 </div>
                                 <form id="orderform" name="orderform" method="POST" enctype="multipart/form-data">
                                     <input type="hidden" id="design_id" name="design_id" value="0">
+                                    <input type="hidden" id="user_id" name="user_id" value="0">
                                 </form>
                             </div>
                         </div>
