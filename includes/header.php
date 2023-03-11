@@ -87,6 +87,9 @@
                         <a href="dashboard"> <i class="fe-airplay"></i>Dashboard</a>
                     </li>
                     <li >
+                        <a href="designs"> <i class="fe-shopping-cart"></i>New Designs</a>
+                    </li>
+                    <li >
                         <a href="products"> <i class="fe-shopping-cart"></i>Products</a>
                     </li>
                     <li >

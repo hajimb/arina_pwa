@@ -1,4 +1,4 @@
-<?php $pagename = 'products' ?>
+<?php $pagename = 'designs' ?>
 <?php include('includes/top.php'); ?>
 <div id="wrapper">
     <?php include('includes/header.php'); ?>
@@ -10,7 +10,7 @@
     <div class="content-page">
         <div class="content">
             <form id="productform" class="form-horizontal">
-                <input type="hidden" name="type" value="p">
+                <input type="hidden" name="type" value="d">
             </form>
 
             <!-- Start Content-->
@@ -18,7 +18,7 @@
                 <?php include('product-filter.php'); ?>
                 <div class="row">
                     <div class="col-12">
-                        <h4 class="page-title">Products List (<span id="product_count"></span> Found)</h4>
+                        <h4 class="page-title">New Design List (<span id="product_count"></span> Found)</h4>
                     </div>
                 </div>
                 <div class="row" id="product_div">
@@ -45,7 +45,7 @@
     }
 </style>
 <?php include('includes/script.php'); ?>
-<script src="assets/js/products.js?i=<?= time();?>"></script>
+<script src="assets/js/designs.js?i=<?= time();?>"></script>
 </body>
 
 </html>

@@ -29,6 +29,7 @@
                                     <th data-priority="1">Sr No.</th>
                                     <th data-priority="1">Invoice Number</th>
                                     <th data-priority="2">Invoice Date</th>
+                                    <th data-priority="1">Total Quantity</th>
                                     <th data-priority="1">Total Amount</th>
                                     <th data-priority="1">Paid Amount</th>
                                     <th data-priority="1">Balance Amount</th>
@@ -39,11 +40,21 @@
                                 </thead>
                                 <tbody id="orders_div">
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="3" style="text-align:right"></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th colspan="3" style="text-align:right"></th>
+                                    </tr>
+                                </tfoot>                            
                             </table>
                             </div>
                         </div>
-                        <form id="orderform" name="orderform" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" id="order_id" name="order_id" value="0">
+                        <form id="invoiceform" name="invoiceform">
+                            <input type="hidden" id="invoice_id" name="invoice_id" value="0">
                         </form>
 
                     </div>
@@ -65,31 +76,34 @@
 <script src="assets/js/invoice.js?i=<?= time();?>"></script>
 </body>
 </html>
-<div id="OrderDetailsModal" class="modal fade" role="dialog" data-keyboard="false" aria-modal="true">
+<div id="PaymentDetailsModal" class="modal fade" role="dialog" data-keyboard="false" aria-modal="true">
   <div class="modal-dialog modal-xl">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Order Details : <span id="order_number"></span></h4>
+        <h4 class="modal-title">Payment Details : <span id="invoice_number"></span></h4>
       </div>
       <div class="modal-body">
         <div class="card-box table-responsive maxheight">
             <table id="datatable-designs" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                 <thead>
                 <tr>
-                    <th>Image</th>
-                    <th>Title</th>
-                    <th>Stlye No</th>
-                    <th>Rate</th>
-                    <th>Quantity</th>
-                    <th>Total Amount</th>
+                    <th>Sr. No</th>
+                    <th>Invoice Number</th>
+                    <th>Invoice Date</th>
+                    <th>Amount Paid</th>
+                    <th>Payment Date</th>
+                    <th>Payment Type</th>
+                    <th>Cheque / UTR No</th>
+                    <th>Cheque / Transfer Date</th>
                 </tr>
                 </thead>
                 <tbody id="dv_order_details">
                 </tbody>
                 <tfooter>
-                    <td colspan="5" class="text-right">Total</td>
+                    <td colspan="3" class="text-right">Total</td>
                     <td  class="text-right" id="grandtotal"></td>
+                    <td colspan="4"></td>
                 </tfooter>
             </table>
         </div>

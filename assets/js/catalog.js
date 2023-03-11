@@ -25,10 +25,10 @@ function calllist() {
         "bProcessing": true, "bServerSide": false, "bSortClasses": false, "destroy": true,
         "columnDefs": [
             { "orderable": false, "targets": [0] },
-            { "targets": [8], "className": 'hide' },
-            // { "targets": [0], "className": 'width-100 text-center' },
+            { "targets": [10], "className": 'hide' },
+            { "targets": [7,8], "className": 'text-right' },
             {
-                "targets": [7], "render": function (data, type) {
+                "targets": [9], "render": function (data, type) {
                     return type === 'sort' ? data : moment(data).format('Do MMM YYYY');
                 }
             },
@@ -39,6 +39,49 @@ function calllist() {
                 }
              }
         ],
+        footerCallback: function (row, data, start, end, display) {
+            var api = this.api();
+ 
+            // Remove the formatting to get integer data for summation
+            var intVal = function (i) {
+                return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+            };
+ 
+            // Total over all pages
+            total_qty = api
+                .column(7)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+ 
+            // Total over this page
+            pageTotal_qty = api
+                .column(7, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+ 
+            total_amt = api
+                .column(8)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+ 
+            // Total over this page
+            pageTotal_amt = api
+                .column(8, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+ 
+            // Update footer
+            $(api.column(7).footer()).html(pageTotal_qty + '<br> (' + total_qty + ' total)');
+            $(api.column(8).footer()).html(pageTotal_amt + '<br> (' + total_amt + ' total)');
+        },
         'select': {
            'style': 'multi'
         },
@@ -236,6 +279,8 @@ function loadProducts(flg){
                                             </ul>
                                             </td>
                                             <td>${value['diamond_weight']}</td>
+                                            <td>${value['total_order']}</td>
+                                            <td>${value['open_order']}</td>
                                             <td>${value['create_date']}</td>
                                             <td>${value['id']}</td>
                                         </tr>`;

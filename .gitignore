@@ -1,3 +1,5 @@
 .htaccess
 manifest.json
 includes/local_script.php
+index.js
+pwa-FCM-notifications-tutorial-final/

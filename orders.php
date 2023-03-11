@@ -29,12 +29,20 @@
                                     <th data-priority="1">Sr No.</th>
                                     <th data-priority="1">Order Number</th>
                                     <th data-priority="2">Order Date</th>
+                                    <th data-priority="1">Total Quantity</th>
                                     <th data-priority="1">Total Amount</th>
                                     <th data-priority="1">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody id="orders_div">
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="4" style="text-align:right">Total:</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
                             </table>
                             </div>
                         </div>

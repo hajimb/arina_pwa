@@ -19,13 +19,94 @@ function calllist() {
         "columnDefs": [
             { "orderable": false, "targets": [0] },
             { "targets": [7], "className": 'text-center' },
+            { "targets": [3,4,5,6], "className": 'text-right' },
             { "targets": [0,8], "className": 'text-center', "orderable": false },
             {
-                "targets": [2,6], "render": function (data, type) {
+                "targets": [2,7], "render": function (data, type) {
                     return type === 'sort' ? data : moment(data).format('Do MMM YYYY');
                 }
             }
         ],
+        footerCallback: function (row, data, start, end, display) {
+            var api = this.api();
+ 
+            // Remove the formatting to get integer data for summation
+            var intVal = function (i) {
+                return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+            };
+ 
+            // Total over all pages
+            total_qty = api
+                .column(3)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+ 
+            // Total over this page
+            pageTotal_qty = api
+                .column(3, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+ 
+            // Total over all pages
+            total_amt = api
+                .column(4)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+ 
+            // Total over this page
+            pageTotal_amt = api
+                .column(4, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+
+
+            // Total over all pages
+            total_paid = api
+                .column(5)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+ 
+            // Total over this page
+            pageTotal_paid = api
+                .column(5, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+                
+            // Total over all pages
+            total_balance = api
+                .column(6)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+ 
+            // Total over this page
+            pageTotal_balance = api
+                .column(6, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+ 
+            // Update footer
+            $(api.column(3).footer()).html(pageTotal_qty + '<br> (' + total_qty + ' total)');
+            $(api.column(4).footer()).html('$' + pageTotal_amt + '<br> ( $' + total_amt + ' total)');
+            $(api.column(5).footer()).html('$' + pageTotal_paid + '<br> ( $' + total_paid + ' total)');
+            $(api.column(6).footer()).html('$' + pageTotal_balance + '<br> ( $' + total_balance + ' total)');
+        },
         "ajax":{
             "url": api_url + 'v2/getinvoice',
             "type": "POST",
@@ -48,13 +129,13 @@ function calllist() {
     });
 }
 
-$(document).on('click', ".btn_orders", function () {
+$(document).on('click', ".payment_btn", function () {
     var id = $(this).attr('data-id');
-    var order_number = $(this).attr('data-number');
-    $("#order_id").val(id);
-    $(".btn").prop('disabled', true);
-    var url = api_url + 'v2/getorderdetails';
-    var formdata = $("#orderform").serializeToJSON();
+    var invoice_number = $(this).attr('data-number');
+    $("#invoice_id").val(id);
+    var url = api_url + 'v2/getpayments';
+    var formdata = $("#invoiceform").serializeToJSON();
+    console.log(formdata);
     $.ajax({
         type: 'post',
         url: url,
@@ -66,36 +147,33 @@ $(document).on('click', ".btn_orders", function () {
         cache: false,
         success: function (resData) {
             var response = resData;
-            // console.log(response);
-            $(".btn").prop('disabled', false);
-            $("#OrderDetailsModal").modal('show');
+            $("#PaymentDetailsModal").modal('show');
             if (response['validate'] === true) {
                 if (response['status'] == true) {
-                    var latest_design = response['data']['items'];
-                    var total_amount = response['data']['total_amount'];
-
+                    var latest_design = response['data'];
                     if (latest_design != null) {
-                        var image_path = profile_data['product_image_path'];
-                        var imagestr = '';
+                        var total = 0;
                         var cnt = 1;
+                        html = '';
                         $.each(latest_design, function (index, value) {
-                            var img = image_path + value['image'];
-                            imagestr = imagestr + `<tr>
-                                                        <td><a href='${img}' data-lightbox='#single-image-${cnt}'><img id='single-image-${cnt}' alt='${value['style_no']}' src='${img}' class='nav-design'></a></td>
-                                                        <td>${value['title']}</td>
-                                                        <td>${value['style_no']}</td>
-                                                        <td class="text-right">${value['rate']}</td>
-                                                        <td class="text-center">${value['quantity']}</td>
-                                                        <td class="text-right">${value['total_amount']}</td>
-                                                    </tr>`;
+                            html = html + `<tr>
+                                                <td>${cnt}</td>
+                                                <td>${value['invoice_number']}</td>
+                                                <td>${value['invoice_date']}</td>
+                                                <td class="text-right">${value['amount']}</td>
+                                                <td>${value['payment_date']}</td>
+                                                <td>${value['payment_type']}</td>
+                                                <td>${value['ref_no']}</td>
+                                                <td>${value['ref_date']}</td>
+                                            </tr>`;
                             cnt++;
+                            total =+ value['amount'];
 
                         });
-                        $("#dv_order_details").html(imagestr);
-                        $("#grandtotal").html(total_amount.toFixed(2));
-                        $("#order_number").html(order_number);
+                        $("#dv_order_details").html(html);
+                        $("#grandtotal").html(total.toFixed(2));
+                        $("#invoice_number").html(invoice_number);
                     }
-
                 } else if (response['status'] == false) {
                     toaster(response['message'], 'Error', 'error');
                     return false;
@@ -105,7 +183,6 @@ $(document).on('click', ".btn_orders", function () {
                     if (value != '') {
                         toaster(value, 'Error', 'error');
                         $("#" + key).focus();
-                        $(".btn").prop('disabled', false);
                         return false;
                     }
                 });
@@ -117,7 +194,6 @@ $(document).on('click', ".btn_orders", function () {
                 errorMessage = xhr.responseJSON.message;
             }
             toaster(errorMessage, 'Error', 'error');
-            $(".btn").prop('disabled', false);
         }
     });
 });

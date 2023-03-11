@@ -18,13 +18,56 @@ function calllist() {
         "bProcessing": true, "bServerSide": false, "bSortClasses": false, "destroy": true,
         "columnDefs": [
             { "orderable": false, "targets": [0] },
-            // { "targets": [0], "className": 'width-100 text-center' },
+            { "targets": [3,4], "className": 'text-right' },
             {
                 "targets": [2], "render": function (data, type) {
                     return type === 'sort' ? data : moment(data).format('Do MMM YYYY');
                 }
             }
         ],
+        footerCallback: function (row, data, start, end, display) {
+            var api = this.api();
+ 
+            // Remove the formatting to get integer data for summation
+            var intVal = function (i) {
+                return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+            };
+ 
+            // Total over all pages
+            total_qty = api
+                .column(3)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+ 
+            // Total over this page
+            pageTotal_qty = api
+                .column(3, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+ 
+            total_amt = api
+                .column(4)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+ 
+            // Total over this page
+            pageTotal_amt = api
+                .column(4, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+ 
+            // Update footer
+            $(api.column(3).footer()).html(pageTotal_qty + '<br> (' + total_qty + ' total)');
+            $(api.column(4).footer()).html('$' + pageTotal_amt + '<br> ( $' + total_amt + ' total)');
+        },
         "ajax":{
             "url": api_url + 'v2/getorders',
             "type": "POST",

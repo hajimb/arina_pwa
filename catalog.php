@@ -33,12 +33,22 @@
                                             <th data-priority="1">Style No</th>
                                             <th data-priority="1">Gold Weight</th>
                                             <th data-priority="1">Diamond Weight</th>
+                                            <th data-priority="1">Total Order</th>
+                                            <th data-priority="1">Open Order</th>
                                             <th data-priority="1">Creation Date</th>
                                             <th data-priority="1">ID</th>
                                         </tr>
                                         </thead>
                                         <tbody id="product_div">
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="7" style="text-align:right">Total:</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>                                        
                                     </table>
                                     </div>
                                 </div>

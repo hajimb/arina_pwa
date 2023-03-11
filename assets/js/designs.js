@@ -140,19 +140,7 @@ function loadProducts(flg){
                                                         </ul>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-3">
-                                                            <div class="mt-2">
-                                                                <h5 class="mb-0">${value['total_order']}</h5>
-                                                                <p class="mb-0 f-2 text-gray-400">Total Orders</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <div class="mt-2">
-                                                                <h5 class="mb-0">${value['open_order']}</h5>
-                                                                <p class="mb-0 f-2 text-gray-400">Open Orders</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6 text-right">
+                                                        <div class="col-12 text-right">
                                                             <div class="btn-group btn-group-justified text-white mb-2">
                                                                 <a class="btn btn-sm btn-warning btn_enquiry waves-effect waves-light" data-name="${value['style_no']}" data-title="${value['title']}" data-id="${value['id']}" role="button">Enquire</a>
                                                                 <a class="btn btn-sm btn-danger btn_reject waves-effect waves-light" data-id="${value['id']}"  role="button">Reject</a>
