@@ -9,6 +9,9 @@
     </style>
     <div class="content-page">
         <div class="content">
+            <form id="catalogform" class="form-horizontal">
+                <input type="hidden" name="type" value="a">
+            </form>
             <!-- Start Content-->
             <div class="container-fluid">
                 <?php include('product-filter.php'); ?>
@@ -52,7 +55,7 @@
                                     </table>
                                     </div>
                                 </div>
-                                <form id="orderform" name="orderform" method="POST" enctype="multipart/form-data">
+                                <form id="orderform" name="orderform" method="POST" target="_blank" enctype="multipart/form-data">
                                     <input type="hidden" id="design_id" name="design_id" value="0">
                                     <input type="hidden" id="user_id" name="user_id" value="0">
                                 </form>

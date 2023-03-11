@@ -35,6 +35,7 @@ $(document).on('click', ".btn_enquiry", function () {
     $("#EnquiryModal").modal('show');
 });
 
+
 $(document).on('click', "#enquiry_submit", function () {
     $(".btn").prop('disabled', true);
     // $("#msgbox").show();
@@ -172,4 +173,21 @@ $(document).on('click', "#clear_btn", function () {
 $(document).on('click', "#search_btn", function () {
     loadProducts(false);
 });
+
+$(document).on('click', ".download-pdf", function () {
+    var id      = $(this).attr('data-id');
+    var type    = $(this).attr('data-type');
+    var url     = api_url + 'api/data/downloadpdf/'+type+'/'+id;
+    window.open(url);
+    return false;
+});
+
+$(document).on('click', ".download-xls", function () {
+    var id      = $(this).attr('data-id');
+    var type    = $(this).attr('data-type');
+    var url     = api_url + 'api/data/downloadexcel/'+type+'/'+id;
+    window.open(url);
+    return false;
+});
+
 //Filter in Product and Catalog page

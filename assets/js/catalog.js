@@ -91,10 +91,12 @@ function calllist() {
 
 function loadPageData(){
     var url = api_url + 'v2/getdesign';
+    var formdata = $("#catalogform").serializeToJSON();
     $.ajax({
         type: 'post',
         url: url,
         headers: { 'Authorization': token },
+        data: formdata,
         processData: false,  // Important!
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -146,7 +148,7 @@ $(document).on('click', "#save_pdf", function () {
     rowcollection.each(function(index,elem){
         var $row            = $(elem).closest('tr');
         var $columns        = $row.find('td');
-        var id              = $columns[8].innerHTML;
+        var id              = $columns[10].innerHTML;
         // var res = course.split(",");
         // console.log(cnt, id);
         
@@ -158,7 +160,7 @@ $(document).on('click', "#save_pdf", function () {
         toaster('Please select alteast 1 Design', 'Error', 'error');
     }else{
         
-        // var res = selectedIds.toString();
+        var res = selectedIds.toString();
         // console.log(res);
         // return false;
         $("#design_id").val(selectedIds.toString());
