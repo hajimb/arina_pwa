@@ -2,7 +2,7 @@ var token ;
 var categories = {};
 var products ;
 var table;
-
+var deleted = [];
 var selectedIds = [];
 $(document).ready(function () {
     var x = localStorage.getItem("arina_data");
@@ -145,24 +145,29 @@ $(document).on('click', "#save_pdf", function () {
     selectedIds = [];
     // selectedIds = '';
     var cnt = 0;
+    console.log(deleted);
     rowcollection.each(function(index,elem){
         var $row            = $(elem).closest('tr');
         var $columns        = $row.find('td');
         var id              = $columns[10].innerHTML;
+        var cn              = $columns[1].innerHTML;
+        console.log('['+cn+']');
+        if($.inArray(parseInt(cn), deleted) == -1){
+            selectedIds.push(id); 
+            cnt++; 
+        }
         // var res = course.split(",");
         // console.log(cnt, id);
         
         // selectedIds = selectedIds + id + ','; 
-        selectedIds.push(id); 
-        cnt++; 
     });
     if(cnt == 0){
         toaster('Please select alteast 1 Design', 'Error', 'error');
     }else{
         
         var res = selectedIds.toString();
-        // console.log(res);
-        // return false;
+        console.log(res);
+        return false;
         $("#design_id").val(selectedIds.toString());
         $(".btn").prop('disabled', true);
         var url = api_url + 'v2/catalogpdf';
@@ -237,6 +242,7 @@ function loadProducts(flg){
         var cnt = 0;
         $("#product_div").html('');
         // console.log('imagestr: '+imagestr);
+        deleted = [];
         $.each(products, function (index, value) {
             var flag = true;
             var images      = value['images'];
@@ -261,12 +267,23 @@ function loadProducts(flg){
                 cnt++;
                 var d_img = '';
                 $.each(images, function (i, img) {
-                    var imgpath = image_path + img['image'];
-                    d_img = `<a href='${imgpath}' data-lightbox='#single-image-${cnt}'><img id='single-image-${cnt}' alt='${value['style_no']}' src='${imgpath}' class='nav-design'></a>`;
+                    if(img['is_default'] == 1){
+                        var imgpath = image_path + img['image'];
+                        d_img = `<a href='${imgpath}' data-lightbox='#single-image-${cnt}'><img id='single-image-${cnt}' alt='${value['style_no']}' src='${imgpath}' class='nav-design'></a>`;
+                    }
                     // return true;
                 });
-                imagestr = imagestr + ` <tr>
-                                            <td>${value['id']}</td>
+                val = value['id'];
+                cl = '';
+                if(value['deleted'] == 1){
+                    console.log(cnt);
+                    console.log(value['id']);
+                    val = '';
+                    cl = 'style="background-color:#f0629259 !important;"';
+                    deleted.push(cnt);
+                }
+                imagestr = imagestr + ` <tr ${cl}>
+                                            <td>${val}</td>
                                             <td>${cnt}</td>
                                             <td>${d_img}</td>
                                             <td>${category}</td>

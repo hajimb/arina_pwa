@@ -23,6 +23,9 @@
                                 <span style="float:right;display:inline-block;"><button type="button" id="save_pdf" class="btn btn-sm btn-success"> Save PDF </button></span>
                             </div>
                             <div class="card-body">
+                                <div style="padding:10px;margin:10px 0; border:1px solid #cecece;" >
+                                <button type="button" class="btn btn-pink" disabled=""> </button> - indicates Design Ordered but removed from your list. you cannot add it to your catalog 
+                                </div>
                                 <div class="table-rep-plugin">
                                     <div class="table-responsive mb-0" data-pattern="priority-columns">
                                         <table id="datatable" class="table table-bordered  dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
