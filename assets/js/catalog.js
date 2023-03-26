@@ -166,8 +166,8 @@ $(document).on('click', "#save_pdf", function () {
     }else{
         
         var res = selectedIds.toString();
-        console.log(res);
-        return false;
+        // console.log(res);
+        // return false;
         $("#design_id").val(selectedIds.toString());
         $(".btn").prop('disabled', true);
         var url = api_url + 'v2/catalogpdf';

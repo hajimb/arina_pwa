@@ -23,6 +23,12 @@
                 </div>
                 <div class="row" id="product_div">
                 </div>
+                <div id="videolightbox">
+                    <i id="close-btn" class="fa fa-times"></i>
+                    <div class='embed-container'>
+                        <iframe id="video"  src="" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
                 <!-- end row -->
             </div> <!-- end container-fluid -->
         </div> <!-- end content -->

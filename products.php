@@ -1,5 +1,6 @@
 <?php $pagename = 'products' ?>
 <?php include('includes/top.php'); ?>
+
 <div id="wrapper">
     <?php include('includes/header.php'); ?>
     <style>
@@ -23,6 +24,12 @@
                 </div>
                 <div class="row" id="product_div">
                 </div>
+                <div id="videolightbox">
+                    <i id="close-btn" class="fa fa-times"></i>
+                    <div class='embed-container'>
+                        <iframe id="video"  src="" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
                 <!-- end row -->
             </div> <!-- end container-fluid -->
         </div> <!-- end content -->
@@ -33,17 +40,6 @@
     <!-- End Page content -->
     <!-- ============================================================== -->
 </div>
-<style>
-    .carousel-indicators li {
-        background-color: #000 !important;
-        width: 10px !important;
-    }
-
-    .carousel-indicators {
-        bottom: -15px !important;
-
-    }
-</style>
 <?php include('includes/script.php'); ?>
 <script src="assets/js/products.js?i=<?= time();?>"></script>
 </body>

@@ -190,4 +190,28 @@ $(document).on('click', ".download-xls", function () {
     return false;
 });
 
+function showVideo(me){
+    var video_link = $(me).attr('video-link');
+    var shorts_regex = new RegExp(/((http(s)?:\/\/)?)(www\.)?((youtube\.com\/)|(youtu.be\/))(shorts\/)([a-zA-Z0-9\-_])[\S]+/g);
+    if (shorts_regex.test(video_link)) {
+        var video_id = /[^/]*$/.exec(video_link)[0];
+        var videoURL = "https://www.youtube-nocookie.com/embed/"+video_id+"?mode=opaque&rel=0&autohide=1&showinfo=0&wmode=transparent&autoplay=1";
+        $("#videolightbox").fadeIn(1000);
+        $(me).hide();
+        // var videoURL = $('#video').prop('src');
+        // videoURL = videoURL.replace('&autoplay=1', ''); // removing autoplay form url
+        // videoURL += "&autoplay=1";
+        $('#video').prop('src', videoURL);
+    }else{
+        alert('Sorry Video is Not Playable')
+    }
+
+}
+
+// When the close button is clicked make the lightbox fade out in the span of 0.5 seconds and show the play button
+$(document).on('click', "#close-btn, #videolightbox", function () {
+    $('#video').prop('src', '');
+    $("#videolightbox").fadeOut(500);
+    $(".btn-youtube").show(250);
+});
 //Filter in Product and Catalog page

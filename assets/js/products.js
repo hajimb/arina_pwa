@@ -12,6 +12,12 @@ $(document).ready(function () {
     } else {
         window.location = 'login';
     }
+    // When the button is clicked make the lightbox fade in in the span of 1 second, hide itself and start the video
+    $(document).on('click', ".btn-youtube", function () {
+        showVideo(this);
+    });
+
+
 });
 
 function loadPageData(){
@@ -112,32 +118,46 @@ function loadProducts(flg){
                                         </div>`;
                     img_cnt++;
                 });
+                var videobutton = '';
+                if(value['video_link'] != '' && value['video_link'] !== null){
+                    videobutton = '<button type="button"  data-video-id = "zmTR-TDrQxc" video-link="'+value['video_link']+'" class="btn btn-youtube waves-effect waves-light"><i class="fas fa-video"></i></button>';
+                }
+
                 imagestr = imagestr + `<div class="col-lg-3 col-md-6">
                                             <div class="card-box">
                                                 <div class="member-card-alt">
-                                                    <h4 class="mb-1 mt-0">${category}</h4>
-                                                    <h5 class="mb-2 mt-0">${value['title']}</h5>
-                                                    <div class="avatar-xxl member-thumb mb-2 float-left">
-                                                        <div id="carouselExample" class="carousel slide" data-ride="carousel">
-                                                            <ol class="carousel-indicators">
-                                                               ${carousel_indicators}
-                                                            </ol>
-                                                            <div class="carousel-inner" role="listbox">
-                                                                ${carousel_inner}
-                                                            </div>
-                                                        </div>    
+                                                    <div class="row">
+                                                        <div class="col-9">
+                                                            <h4 class="mb-1 mt-0">${category}</h4>
+                                                            <h5 class="mb-2 mt-0">${value['title']}</h5>
+                                                        </div>
+                                                        <div class="col-3 text-right">${videobutton}
+                                                        </div>
                                                     </div>
-                                                    <div class="member-card-alt-info">
-                                                        <h6 class="mb-1 mt-1">Style: ${value['style_no']}</h6>
-                                                        <h6 class="mb-1 mt-1">Diamond Wg: ${value['diamond_weight']} K</h6>
-                                                        <h6 class="mb-1 mt-1">Gold Wg:</h6>
-                                                        <ul class="list-unstyled">
-                                                            <li>9 kt : ${value['gold_9kt']} gm</li>
-                                                            <li>10 kt : ${value['gold_10kt']} gm</li>
-                                                            <li>14 kt : ${value['gold_14kt']} gm</li>
-                                                            <li>18 kt : ${value['gold_18kt']} gm</li>
-                                                            <li>925 S : ${value['gold_925s']} gm</li>
-                                                        </ul>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="avatar-xxl member-thumb mb-2 float-left">
+                                                                <div id="carouselExample" class="carousel slide" data-ride="carousel">
+                                                                    <div class="carousel-inner" role="listbox">
+                                                                        ${carousel_inner}
+                                                                    </div>
+                                                                </div>    
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="">
+                                                                <h6 class="mb-1 mt-1">Style: ${value['style_no']}</h6>
+                                                                <h6 class="mb-1 mt-1">Diamond Wg: ${value['diamond_weight']} K</h6>
+                                                                <h6 class="mb-1 mt-1">Gold Wg:</h6>
+                                                                <ul class="list-unstyled">
+                                                                    <li>9 kt : ${value['gold_9kt']} gm</li>
+                                                                    <li>10 kt : ${value['gold_10kt']} gm</li>
+                                                                    <li>14 kt : ${value['gold_14kt']} gm</li>
+                                                                    <li>18 kt : ${value['gold_18kt']} gm</li>
+                                                                    <li>925 S : ${value['gold_925s']} gm</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-3">

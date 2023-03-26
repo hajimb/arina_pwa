@@ -15,6 +15,7 @@
     <link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/jquery-toast/jquery.toast.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/app.css?i=<?= time();?>" rel="stylesheet" type="text/css"  id="app-stylesheet" />
+    <link href="assets/css/video.css?i=<?= time();?>" rel="stylesheet" type="text/css"  id="app-stylesheet" />
 
     <!-- third party css -->
     <link href="assets/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
