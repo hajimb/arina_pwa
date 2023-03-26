@@ -193,8 +193,18 @@ $(document).on('click', ".download-xls", function () {
 function showVideo(me){
     var video_link = $(me).attr('video-link');
     var shorts_regex = new RegExp(/((http(s)?:\/\/)?)(www\.)?((youtube\.com\/)|(youtu.be\/))(shorts\/)([a-zA-Z0-9\-_])[\S]+/g);
-    if (shorts_regex.test(video_link)) {
-        var video_id = /[^/]*$/.exec(video_link)[0];
+    var watch_regex = new RegExp(/((http(s)?:\/\/)?)(www\.)?((youtube\.com\/)|(youtu.be\/))(watch?)([a-zA-Z0-9\-_])[\S]+/g);
+    var direct_regex = new RegExp(/((http(s)?:\/\/)?)(www\.)?((youtube\.com\/)|(youtu.be\/))([a-zA-Z0-9\-_])[\S]+/g);
+    var video_id = '';
+    if (shorts_regex.test(video_link)) {  // check for youtube Shorts link
+        video_id = /[^/]*$/.exec(video_link)[0];
+    }else if (watch_regex.test(video_link)) { // check for youtube watch link
+        video_id = video_link.substring(video_link.indexOf('v=') + 2);
+    }else if (direct_regex.test(video_link)) { // check for youtube direct link
+        video_id = /[^/]*$/.exec(video_link)[0];
+    }
+    console.log(video_id);
+    if(video_id != ''){
         var videoURL = "https://www.youtube-nocookie.com/embed/"+video_id+"?mode=opaque&rel=0&autohide=1&showinfo=0&wmode=transparent&autoplay=1";
         $("#videolightbox").fadeIn(1000);
         $(me).hide();
@@ -203,7 +213,7 @@ function showVideo(me){
         // videoURL += "&autoplay=1";
         $('#video').prop('src', videoURL);
     }else{
-        alert('Sorry Video is Not Playable')
+        alert('Sorry Video is Not Playable');
     }
 
 }
