@@ -224,4 +224,6 @@ $(document).on('click', "#close-btn, #videolightbox", function () {
     $("#videolightbox").fadeOut(500);
     $(".btn-youtube").show(250);
 });
+
+
 //Filter in Product and Catalog page

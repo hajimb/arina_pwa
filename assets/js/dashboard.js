@@ -60,13 +60,13 @@ function loaddashboard(){
                                                         <td><a href='${img}' data-lightbox='#single-image-${cnt}'><img id='single-image-${cnt}' alt='${value['style_no']}' src='${img}' class='nav-design'></a></td>
                                                         <td>${value['category']}</td>
                                                         <td>${value['style_no']}</td>
-                                                        <td>9 KT : ${value['gold_9kt']}<br />
+                                                        <td style="white-space: nowrap;">9 KT : ${value['gold_9kt']}<br />
                                                         10 KT : ${value['gold_10kt']}<br />
                                                         14 KT : ${value['gold_14kt']}<br />
                                                         18 KT : ${value['gold_18kt']}<br />
                                                         925S : ${value['gold_925s']}</td>
                                                         <td>${value['diamond_weight']}</td>
-                                                        <td>${value['createdAt']}</td>
+                                                        <td style="white-space: nowrap;">${value['createdAt']}</td>
                                                         <td>
                                                             <div class="btn-group btn-group-justified text-white mb-2">
                                                                 <a class="btn btn-sm btn-warning btn_enquiry waves-effect waves-light" data-name="${value['style_no']}" data-title="${value['title']}" data-id="${value['id']}" role="button">Enquire</a>
@@ -88,11 +88,11 @@ function loaddashboard(){
                             var img = image_path + value['img'];
                             imagestr = imagestr + `<tr>
                                                         <td>${cnt}</td>
-                                                        <td>${value['invoice_no']}</td>
-                                                        <td>$ ${value['invoice_amount']}</td>
-                                                        <td>$ ${value['paid_amount']}</td>
-                                                        <td>$ ${value['pending_amount']}</td>
-                                                        <td>
+                                                        <td style="white-space: nowrap;">${value['invoice_no']}</td>
+                                                        <td style="white-space: nowrap;">$ ${value['invoice_amount']}</td>
+                                                        <td style="white-space: nowrap;">$ ${value['paid_amount']}</td>
+                                                        <td style="white-space: nowrap;">$ ${value['pending_amount']}</td>
+                                                        <td style="white-space: nowrap;">
                                                             <i class="mdi mdi-clock-outline text-success"></i> ${value['due_date']}
                                                         </td>
                                                     </tr>`;
