@@ -7,11 +7,13 @@ $(document).ready(function () {
     if(null !== x){
         obj = $.parseJSON(x);
         var token = obj['token'];
+        $("#fcm").val(fcm);
         var url = api_url+'v2/check_session';
+        var formdata = $("#loginform").serializeToJSON();
         $.ajax({
             type    : 'post',
             url     : url,
-            data: {fcm : fcm},
+            data    : formdata,
             headers: { 'Authorization': token },
             processData: false,  // Important!
             contentType:"application/json; charset=utf-8",
@@ -21,7 +23,7 @@ $(document).ready(function () {
                 var response = resData;
                 if(response['validate'] === true){
                     if(response['status'] == true){
-                        // console.log(response['data']);
+                        console.log(response['data']);
                         localStorage.setItem("arina_data", JSON.stringify(response['data']));
                         window.location = 'dashboard'; 
                     }
