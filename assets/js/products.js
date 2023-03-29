@@ -147,7 +147,7 @@ function loadProducts(flg){
                                                         <div class="col-6">
                                                             <div class="">
                                                                 <h6 class="mb-1 mt-1">Style: ${value['style_no']}</h6>
-                                                                <h6 class="mb-1 mt-1">Diamond Wg: ${value['diamond_weight']} K</h6>
+                                                                <h6 class="mb-1 mt-1">Diamond Wg: ${value['diamond_weight']} Cts</h6>
                                                                 <h6 class="mb-1 mt-1">Gold Wg:</h6>
                                                                 <ul class="list-unstyled">
                                                                     <li>9 kt : ${value['gold_9kt']} gm</li>
