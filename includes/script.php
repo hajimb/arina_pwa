@@ -21,6 +21,7 @@
     
 <?php if($pagename == "catalog"){ ?>
       <script type="text/javascript" src="assets/js/dataTables.checkboxes.min.js?i=<?= time();?>"></script>
+      <script type="text/javascript" src="assets/libs/bootstrap-select/bootstrap-select.min.js?i=<?= time();?>"></script>
 <?php } if($pagename == "custom_design"){ ?>
       <script type="text/javascript" src="assets/libs/dropzone/dropzone.min.js?i=<?= time();?>"></script>
       <script type="text/javascript" src="assets/js/jquery.repeater.min.js?i=<?= time();?>"></script>

@@ -17,19 +17,19 @@
                         </div>
                         <div class="col-md-2 col-sm-12 col-xs-12 mb-1">
                             <label>Filter By </label>
-                            <select id="filter" class="form-control checkbtn selectpicker" data-live-search="true"
+                            <select id="filter" class="form-control checkbtn selectpicker"
                                 data-style="btn-outline-primary" title="Select Category">
-                                <option value="0" selected>Select Filter By</option>
+                                <option  value="0" selected>Select Filter By</option>
                     <?php if($pagename == 'products'){ ?>
-                        <option value="total_order">Total Order</option>
-                        <option value="open_order">Open Order</option>
+                        <option  value="total_order">Total Order</option>
+                        <option  value="open_order">Open Order</option>
                     <?php } ?>
-                                <option value="gold_9kt">Gold Weight (9 kt)</option>
-                                <option value="gold_10kt">Gold Weight (10 kt)</option>
-                                <option value="gold_14kt">Gold Weight (14 kt)</option>
-                                <option value="gold_18kt">Gold Weight (18 kt)</option>
-                                <option value="gold_925s">Gold Weight (925 S)</option>
-                                <option value="diamond_weight">Diamond Weight</option>
+                                <option hideid="1" dataid="1" value="gold_9kt">Gold Weight (9 kt)</option>
+                                <option hideid="1" dataid="2" value="gold_10kt">Gold Weight (10 kt)</option>
+                                <option hideid="1" dataid="3" value="gold_14kt">Gold Weight (14 kt)</option>
+                                <option hideid="1" dataid="4" value="gold_18kt">Gold Weight (18 kt)</option>
+                                <option hideid="1" dataid="5" value="gold_925s">Gold Weight (925 S)</option>
+                                <option  value="diamond_weight">Diamond Weight</option>
                             </select>
                         </div>
                         <div class="col-md-2 col-sm-12 col-xs-12 mb-1">

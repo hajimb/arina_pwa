@@ -4,12 +4,23 @@ var products ;
 var table;
 var deleted = [];
 var selectedIds = [];
+var gold_type;
+var golds = {
+    '1' : { 'name': "9 kt" , 'key': "gold_9kt" } ,
+    '2' : { 'name': "10 kt" ,  'key': "gold_10kt" } ,
+    '3' : { 'name': "14 kt" ,  'key': "gold_14kt" } ,
+    '4' : { 'name': "18 kt" ,  'key': "gold_18kt" } ,
+    '5' : { 'name': "925 S" ,  'key': "gold_925s" }  
+    };
 $(document).ready(function () {
     var x = localStorage.getItem("arina_data");
     if (null !== x) {
         obj = $.parseJSON(x);
         // console.log(obj);
+        // console.log(JSON.stringify(obj['gold_type']));
+        
         token = obj['token'];
+        gold_type = obj['gold_type'];
         $("#user_id").val(obj['id']);
         calllist();
         // console.log(table)
@@ -29,6 +40,7 @@ function calllist() {
             { "targets": [7,8], "className": 'text-right' },
             {
                 "targets": [9], "render": function (data, type) {
+                    // console.log(data);
                     return type === 'sort' ? data : moment(data).format('Do MMM YYYY');
                 }
             },
@@ -107,6 +119,7 @@ function loadPageData(){
                 if (response['status'] == true) {
                     products    = response['data']['details'];
                     categories  = response['data']['categories'];
+
                     var rt = loadProducts(true);
                     var tr = FillCombo();
                 }else{
@@ -117,24 +130,39 @@ function loadPageData(){
         error: function (xhr, status, error) {
         }
     });
+    // var select_items = ["1","3","4"];
+    // console.log(JSON.stringify(gold_type));
+    $('#gold_type').selectpicker('val', gold_type);
+    HideOptions();
 }
 
 function FillCombo(){
     // console.log(`Fill Combo index`);
+    // console.log(categories);
     $("#category").empty();
     $("#category").append('<option value="0" selected="selected">Select Category</option>');
     $.each(categories, function(i) {
       var opt = $('<option />');
-      //console.log('inside each :' + this.price);
+    //   console.log('inside each :' + categories[i]);
       opt.val(categories[i]);
       opt.text(categories[i]);
       $("#category").append(opt);
     });
-    // $("#category").selectpicker('refresh');
+    $("#category").selectpicker('refresh');
     // console.log(`Fill Combo ended`);
-    // return true;
+    return true;
 }
 
+function HideOptions(){
+    $("#filter").children("option[hideid*='1']").hide();
+    jQuery.each(gold_type, function(index, item) {
+        console.log(item);
+        $("#filter").children("option[dataid*='"+item+"']").show();
+        // do something with `item` (or `this` is also `item` if you like)
+    });
+    $("#filter").selectpicker('refresh');
+
+}
 // $(document).on('change', "#alldesigns", function () {
 //     $('.designcheckbox').not(this).prop('checked', this.checked);
 // });
@@ -174,57 +202,6 @@ $(document).on('click', "#save_pdf", function () {
         $('#orderform').attr('action',url);
         $('#orderform').submit();
         $(".btn").prop('disabled', false);
-        
-        // var formdata = $("#orderform").serializeToJSON();
-        // console.log(formdata);
-        // $.ajax({
-        //     type: 'post',
-        //     url: url,
-        //     headers: { 'Authorization': token },
-        //     data: formdata,
-        //     processData: false,  // Important!
-        //     contentType: "application/json; charset=utf-8",
-        //     dataType: "json",
-        //     cache: false,
-        //     xhr: function () {
-        //         var xhr = new XMLHttpRequest();
-        //         xhr.onreadystatechange = function () {
-        //             if (xhr.readyState == 2) {
-        //                 if (xhr.status == 200) {
-        //                     xhr.responseType = "blob";
-        //                 } else {
-        //                     xhr.responseType = "text";
-        //                 }
-        //             }
-        //         };
-        //         return xhr;
-        //     },
-        //     success: function (data) {
-        //         //Convert the Byte Data to BLOB object.
-        //         var blob = new Blob([data], { type: "application/octetstream" });
- 
-        //         //Check the Browser type and download the File.
-        //         var isIE = false || !!document.documentMode;
-        //         if (isIE) {
-        //             window.navigator.msSaveBlob(blob, fileName);
-        //         } else {
-        //             var url = window.URL || window.webkitURL;
-        //             link = url.createObjectURL(blob);
-        //             var a = $("<a />");
-        //             a.attr("download", fileName);
-        //             a.attr("href", link);
-        //             $("body").append(a);
-        //             a[0].click();
-        //             $("body").remove(a);
-        //         }
-        //         $(".btn").prop('disabled', false);
-        //     },
-        //     error: function (xhr, status, error) {
-        //         var errorMessage = xhr.status + ': ' + xhr.statusText
-        //         toaster(errorMessage, 'Error', 'error');
-        //         $(".btn").prop('disabled', false);
-        //     }
-        // });
     }
     // console.log(rows_selected.join(","));
 });
@@ -241,7 +218,6 @@ function loadProducts(flg){
         var imagestr = '';
         var cnt = 0;
         $("#product_div").html('');
-        // console.log('imagestr: '+imagestr);
         deleted = [];
         $.each(products, function (index, value) {
             var flag = true;
@@ -276,12 +252,19 @@ function loadProducts(flg){
                 val = value['id'];
                 cl = '';
                 if(value['deleted'] == 1){
-                    console.log(cnt);
-                    console.log(value['id']);
+                    // console.log(cnt);
+                    // console.log(value['id']);
                     val = '';
                     cl = 'style="background-color:#f0629259 !important;"';
                     deleted.push(cnt);
                 }
+                gold_kt = '';
+                jQuery.each(gold_type, function(index, item) {
+                    gold_kt += `<li>${golds[item]['name']} : ${value[golds[item]['key']]} gm</li>`;
+                    // $("#filter").children("option[dataid*='"+item+"']").show();
+                    // do something with `item` (or `this` is also `item` if you like)
+                });
+
                 imagestr = imagestr + ` <tr ${cl}>
                                             <td>${val}</td>
                                             <td>${cnt}</td>
@@ -290,11 +273,7 @@ function loadProducts(flg){
                                             <td>${value['style_no']}</td>
                                             <td>   
                                             <ul class="list-unstyled">
-                                            <li>9 kt : ${value['gold_9kt']} gm</li>
-                                            <li>10 kt : ${value['gold_10kt']} gm</li>
-                                            <li>14 kt : ${value['gold_14kt']} gm</li>
-                                            <li>18 kt : ${value['gold_18kt']} gm</li>
-                                            <li>925 S : ${value['gold_925s']} gm</li>
+                                            ${gold_kt}
                                             </ul>
                                             </td>
                                             <td>${value['diamond_weight']}</td>
@@ -314,3 +293,63 @@ function loadProducts(flg){
     $("#loader-wrapper").hide();
     return true;
 }
+
+
+// Update Gold Type
+
+$(document).on('click', "#change_goldtype", function () {
+    $(".btn").prop('disabled', true);
+    // $("#msgbox").show();
+    var url = api_url + 'v2/changegoldtype';
+    var formdata = $("#enquiryform").serializeToJSON();
+    $.ajax({
+        type: 'post',
+        url: url,
+        headers: { 'Authorization': token },
+        data: formdata,
+        processData: false,  // Important!
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        cache: false,
+        success: function (resData) {
+            var response = resData;
+            console.log(response);
+            if (response['validate'] === true) {
+                if (response['status'] == true) {
+                    toaster(response['message'], 'Success', 'success');
+                    
+                    console.log(response['data']);
+                    localStorage.setItem("arina_data", JSON.stringify(response['data']));
+                    
+                    console.log(gold_type);
+                    gold_type = response['data']['gold_type'];
+                    console.log(gold_type);
+                    HideOptions();
+                    loadProducts(true);
+                    $(".btn").prop('disabled', false);
+                } else if (response['status'] == false) {
+                    toaster(response['message'], 'Error', 'error');
+                    $(".btn").prop('disabled', false);
+                    return false;
+                }
+            } else {
+                $.each(response['message'], function (key, value) {
+                    if (value != '') {
+                        toaster(value, 'Error', 'error');
+                        $("#" + key).focus();
+                        $(".btn").prop('disabled', false);
+                        return false;
+                    }
+                });
+            }
+        },
+        error: function (xhr, status, error) {
+            var errorMessage = xhr.status + ': ' + xhr.statusText
+            if (xhr.status = 409) {
+                errorMessage = xhr.responseJSON.message;
+            }
+            toaster(errorMessage, 'Error', 'error');
+            $(".btn").prop('disabled', false);
+        }
+    });
+});

@@ -1,4 +1,8 @@
-<?php $pagename = 'catalog' ?>
+<?php 
+$pagename = 'catalog'; 
+$gold_type = array(1  =>  'Type 1', 2 => 'Type 2', 3  =>  'Type 3');
+
+?>
 <?php include('includes/top.php'); ?>
 <div id="wrapper">
     <?php include('includes/header.php'); ?>
@@ -23,6 +27,26 @@
                                 <span style="float:right;display:inline-block;"><button type="button" id="save_pdf" class="btn btn-sm btn-success"> Save PDF </button></span>
                             </div>
                             <div class="card-body">
+                                <form id="enquiryform" name="enquiryform" method="POST" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-md-4 col-lg-1 mt-1">
+                                            <label>Gold kt To Show</label>
+                                        </div>
+                                        <div class="col-md-4 col-lg-2">
+                                            <select name="gold_type" id="gold_type" class="form-control selectpicker" multiple=""  data-style="btn-outline-primary" title="Choose Gold Type" tabindex="-98">
+                                                <option value="1">9 Kt</option>
+                                                <option value="2">10 Kt</option>
+                                                <option value="3">14 Kt</option>
+                                                <option value="4">18 Kt</option>
+                                                <option value="5">925 S</option>
+                                            </select>
+                                            
+                                        </div>
+                                        <div class="col-md-4 col-lg-8 mt-1">
+                                            <button type="button" id="change_goldtype" class="btn btn-sm btn-warning"> Save </button>
+                                        </div>
+                                    </div>
+                                </form>
                                 <div style="padding:10px;margin:10px 0; border:1px solid #cecece;" >
                                 <button type="button" class="btn btn-pink" disabled=""> </button> - indicates Design Ordered but removed from your list. you cannot add it to your catalog 
                                 </div>
