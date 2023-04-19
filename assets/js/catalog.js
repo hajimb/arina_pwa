@@ -208,6 +208,7 @@ $(document).on('click', "#save_pdf", function () {
 
 function loadProducts(flg){
     var srh_category    = $("#category").val();
+    var srh_style_no    = $("#style_no").val();
     var srh_filter      = $("#filter").val();
     var srh_min_value   = $("#min_value").val();
     var srh_max_value   = $("#max_value").val();
@@ -223,9 +224,15 @@ function loadProducts(flg){
             var flag = true;
             var images      = value['images'];
             var category    = value['category'];
+            var style_no    = value['style_no'];
             
             // console.log(srh_category, category );
             if(srh_category != 0 && srh_category != category && flg == false){
+                // console.log(' srh_category true');
+                flag = false;
+            }
+            // console.log(srh_style_no, style_no );
+            if(srh_style_no != '' && style_no.indexOf(srh_style_no) == -1 && flg == false){
                 // console.log(' srh_category true');
                 flag = false;
             }
@@ -276,7 +283,7 @@ function loadProducts(flg){
                                             ${gold_kt}
                                             </ul>
                                             </td>
-                                            <td>${value['diamond_weight']}</td>
+                                            <td>${value['diamond_weight']} kt</td>
                                             <td>${value['total_order']}</td>
                                             <td>${value['open_order']}</td>
                                             <td>${value['create_date']}</td>

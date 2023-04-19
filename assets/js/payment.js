@@ -18,11 +18,10 @@ function calllist() {
         "bProcessing": true, "bServerSide": false, "bSortClasses": false, "destroy": true,
         "columnDefs": [
             { "orderable": false, "targets": [0] },
-            { "targets": [8], "className": 'text-center' },
-            { "targets": [4,5,6,7], "className": 'text-right' },
-            { "targets": [0,9], "className": 'text-center', "orderable": false },
+            { "targets": [1,3,4,5], "className": 'text-center' },
+            { "targets": [2], "className": 'text-right' },
             {
-                "targets": [3,8], "render": function (data, type) {
+                "targets": [1,5], "render": function (data, type) {
                     return type === 'sort' ? data : moment(data).format('Do MMM YYYY');
                 }
             }
@@ -37,7 +36,7 @@ function calllist() {
  
             // Total over all pages
             total_qty = api
-                .column(4)
+                .column(2)
                 .data()
                 .reduce(function (a, b) {
                     return intVal(a) + intVal(b);
@@ -45,70 +44,18 @@ function calllist() {
  
             // Total over this page
             pageTotal_qty = api
-                .column(4, { page: 'current' })
+                .column(2, { page: 'current' })
                 .data()
                 .reduce(function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0);
  
-            // Total over all pages
-            total_amt = api
-                .column(5)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
- 
-            // Total over this page
-            pageTotal_amt = api
-                .column(5, { page: 'current' })
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
-
-
-
-            // Total over all pages
-            total_paid = api
-                .column(6)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
- 
-            // Total over this page
-            pageTotal_paid = api
-                .column(6, { page: 'current' })
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
-                
-            // Total over all pages
-            total_balance = api
-                .column(7)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
- 
-            // Total over this page
-            pageTotal_balance = api
-                .column(7, { page: 'current' })
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
  
             // Update footer
-            $(api.column(4).footer()).html(pageTotal_qty + '<br> (' + total_qty + ' total)');
-            $(api.column(5).footer()).html('$' + pageTotal_amt + '<br> ( $' + total_amt + ' total)');
-            $(api.column(6).footer()).html('$' + pageTotal_paid + '<br> ( $' + total_paid + ' total)');
-            $(api.column(7).footer()).html('$' + pageTotal_balance + '<br> ( $' + total_balance + ' total)');
+            $(api.column(2).footer()).html(pageTotal_qty + '<br> (' + total_qty + ' total)');
         },
         "ajax":{
-            "url": api_url + 'v2/getinvoice',
+            "url": api_url + 'v2/getpayment',
             "type": "POST",
             "headers": { 'Authorization': token },
             "processData": false,  // Important!
@@ -131,10 +78,9 @@ function calllist() {
 
 $(document).on('click', ".payment_btn", function () {
     var id = $(this).attr('data-id');
-    var invoice_number = $(this).attr('data-number');
-    $("#invoice_id").val(id);
-    var url = api_url + 'v2/getpayments';
-    var formdata = $("#invoiceform").serializeToJSON();
+    $("#payment_id").val(id);
+    var url = api_url + 'v2/getpaymentdetails';
+    var formdata = $("#paymentform").serializeToJSON();
     console.log(formdata);
     $.ajax({
         type: 'post',
@@ -147,32 +93,31 @@ $(document).on('click', ".payment_btn", function () {
         cache: false,
         success: function (resData) {
             var response = resData;
-            $("#PaymentDetailsModal").modal('show');
             if (response['validate'] === true) {
                 if (response['status'] == true) {
-                    var latest_design = response['data'];
-                    if (latest_design != null) {
+                    var payment_details = response['data'];
+                    // console.log(payment_details);
+                    // return false;
+                    if (payment_details != null) {
+                        $("#PaymentDetailsModal").modal('show');
                         var total = 0;
                         var cnt = 1;
                         html = '';
-                        $.each(latest_design, function (index, value) {
+                        $.each(payment_details, function (index, value) {
                             html = html + `<tr>
                                                 <td>${cnt}</td>
                                                 <td>${value['invoice_number']}</td>
                                                 <td>${value['invoice_date']}</td>
                                                 <td class="text-right">${value['amount']}</td>
                                                 <td>${value['payment_date']}</td>
-                                                <td>${value['payment_type']}</td>
-                                                <td>${value['ref_no']}</td>
-                                                <td>${value['ref_date']}</td>
                                             </tr>`;
                             cnt++;
-                            total =+ value['amount'];
+                            total = parseFloat(total) + parseFloat(value['amount']);
 
                         });
-                        $("#dv_order_details").html(html);
+                        $("#dv_payment_details").html(html);
                         $("#grandtotal").html(total.toFixed(2));
-                        $("#invoice_number").html(invoice_number);
+                        // $("#invoice_number").html(invoice_number);
                     }
                 } else if (response['status'] == false) {
                     toaster(response['message'], 'Error', 'error');

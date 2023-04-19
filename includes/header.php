@@ -102,6 +102,9 @@
                         <a href="invoice"> <i class="fe-file-text"></i>Invoices</a>
                     </li>
                     <li >
+                        <a href="payment"> <i class="fe-credit-card"></i>Payment</a>
+                    </li>
+                    <li >
                         <a href="catalog"> <i class="fe-book"></i>Catalog</a>
                     </li>
                     <!--<li >-->

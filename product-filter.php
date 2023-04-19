@@ -8,12 +8,16 @@
                 <form id="searchform" name="searchform">
                     <div class="row">
                         <!-- Choose Category -->
-                        <div class="col-md-3 col-sm-12 col-xs-12 mb-1">
+                        <div class="col-md-2 col-sm-12 col-xs-12 mb-1">
                             <label>Category</label>
                             <select id="category" class="form-control checkbtn selectpicker" data-live-search="true"
                                 data-style="btn-outline-primary" title="Select Category">
                                 <option value="0" selected>Select Category</option>
                             </select>
+                        </div>
+                        <div class="col-md-2 col-sm-12 col-xs-12 mb-1">
+                            <label>Style No</label>
+                            <input type="text" name="style_no" class="form-control checkbtn" id="style_no" placeholder="Style No" title="Style No" value="">
                         </div>
                         <div class="col-md-2 col-sm-12 col-xs-12 mb-1">
                             <label>Filter By </label>
@@ -42,7 +46,7 @@
                             <input type="number" min="0" name="max_value" class="form-control checkbtn" id="max_value"
                                 placeholder="Max Value" title="Max Value" value="0">
                         </div>
-                        <div class="col-md-3 col-sm-12 col-xs-12 mt-2 mb-1">
+                        <div class="col-md-2 col-sm-12 col-xs-12 mt-2 mb-1">
                             <button type="button" disabled=true id="search_btn"
                                 class="btn btn-warning mt-2 search_btn waves-effect waves-light">Search </button>
                             <button type="button" id="clear_btn" class="btn btn-danger mt-2 waves-effect waves-light">
