@@ -167,7 +167,7 @@ $(document).on('click', ".payment_btn", function () {
                                                 <td>${value['ref_date']}</td>
                                             </tr>`;
                             cnt++;
-                            total =+ value['amount'];
+                            total = parseFloat(total) + parseFloat(value['amount']);
 
                         });
                         $("#dv_order_details").html(html);
