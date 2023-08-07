@@ -1,6 +1,6 @@
 var profile_data ;
-function toaster( msg, header, type){
-    $.toast({ heading: header, text: msg, hideAfter: 3e3, position: "top-right", icon: type, stack:1 });
+function toaster( msg, header, type, hide_after = 3e3){
+    $.toast({ heading: header, text: msg, hideAfter: hide_after, position: "top-right", icon: type, stack:1 });
 }
 
 
@@ -8,6 +8,12 @@ $(document).on('click',"#logout",function () {
     localStorage.removeItem("arina_data");
     window.location = 'login'; 
 });
+function ShowOverdue(overdue){
+    if(overdue > 0){
+        $("#overdue_span").text(overdue);
+        toaster(overdue +' Invoice(s) are OverDue for Payment', 'Error', 'error',10000);
+    }
+}
 
 $(document).ready(function () {
     var x = localStorage.getItem("arina_data");

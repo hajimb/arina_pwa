@@ -38,7 +38,8 @@ function loadPageData(){
                 if (response['status'] == true) {
                     products = response['data']['details'];
                     categories = response['data']['categories'];
-
+                    var overdue = response['data']['overdue'];
+                    ShowOverdue(overdue);
                     var rt = loadProducts(true);
                     var tr = FillCombo();
                 }else{

@@ -99,10 +99,10 @@
                         <a href="orders"> <i class="fe-check-circle"></i>Orders</a>
                     </li>
                     <li >
-                        <a href="invoice"> <i class="fe-file-text"></i>Invoices</a>
+                        <a href="invoice"> <i class="fe-file-text"></i>Invoices <span id="overdue_span" class="badge badge-pink rounded-circle noti-icon-badge"></a>
                     </li>
                     <li >
-                        <a href="payment"> <i class="fe-credit-card"></i>Payment</a>
+                        <a href="payment"> <i class="fe-credit-card"></i>Payment</span></a>
                     </li>
                     <li >
                         <a href="catalog"> <i class="fe-book"></i>Catalog</a>

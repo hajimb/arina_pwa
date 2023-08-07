@@ -118,6 +118,8 @@ function calllist() {
                 // console.log(data);
                 if (data.status == true){
                     $("#loader-wrapper").hide();
+                    var overdue = data.overdue;
+                    ShowOverdue(overdue);
                     return data.data;
                 }else{
                     window.location = 'login';
