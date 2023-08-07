@@ -9,9 +9,9 @@ $(document).on('click',"#logout",function () {
     window.location = 'login'; 
 });
 function ShowOverdue(overdue){
-    if(overdue > 0){
+    if(parseInt(overdue) > 0){
         $("#overdue_span").text(overdue);
-        toaster(overdue +' Invoice(s) are OverDue for Payment', 'Error', 'error',10000);
+        toaster('<b>'+overdue +' Invoice(s)</b> are Overdue for Payment', 'Payment Overdue', 'error',5000);
     }
 }
 
