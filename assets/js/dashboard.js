@@ -31,6 +31,7 @@ function loaddashboard(){
                     var latest_design = data['latest_design'];
                     var oustanding = data['oustanding'];
                     var overdue = data['overdue'];
+                    var totals = data['totals'];
                     ShowOverdue(overdue);
                     // var overdue = 1;
                     // console.log(profile);
@@ -102,6 +103,27 @@ function loaddashboard(){
 
                         });
                         $("#db_outstanding").html(imagestr);
+                    }
+                    //Dashboard Table
+                    if (totals != null) {
+
+                        var thead = tbody = '';
+                        var cnt = 1;
+                        thead = '<tr class="bg-dark text-white">';
+                        thead = thead + '<th scope="col"class="sm-text-right" style="width:250px;" data-tablesaw-sortable-col data-tablesaw-priority="persist">Year</th>';
+                        thead = thead + data['thead'];
+                        thead = thead + '<th ></th>';
+                        thead = thead + '</tr>';
+                        $.each(totals, function (index, value) {
+
+                            tbody = tbody + '<tr class="'+value['tr']+'">';
+                            tbody = tbody + '<th class="sm-text-right bg-dark text-white" scope="row" style="white-space:nowrap;">'+value['name']+'</th>';
+                            tbody = tbody + value['td'];
+                            tbody = tbody + '<td></td>';
+                            tbody = tbody + '</tr>';
+                        });
+                        $("#dashboard_head").html(thead);
+                        $("#dashboard_body").html(tbody);
                     }
                     removeloader();
                     $("#loader-wrapper").hide();

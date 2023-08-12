@@ -39,6 +39,31 @@
                     <!--/ meta -->
                 </div>
             </div>
+            <div class="row">
+        <div class="col-xl-12">
+            <div class="card-box widget-box-two widget-two-custom">
+                <div class="table-responsive">
+                    <!-- <table class="table mb-0"> -->
+                    <table class="tablesaw table mb-0" data-tablesaw-mode="stack">
+                        <thead id="dashboard_head">
+                            <tr class="bg-dark text-white">
+                                <th scope="col"class="sm-text-right" style="width:250px;" data-tablesaw-sortable-col data-tablesaw-priority="persist">Year</th>
+                                <th style="width:250px;">2023</th>
+                                <th ></th>
+                            </tr>
+                        </thead>
+                        <tbody id="dashboard_body">
+                            <tr class="table-active">
+                                <th class="sm-text-right bg-dark text-white" scope="row" style="white-space:nowrap;">Total</th>
+                                <td>3787348</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
             <!-- end row -->
             <div class="row justify-content-center">
                 <div class="col-md-6 col-xl-3">
