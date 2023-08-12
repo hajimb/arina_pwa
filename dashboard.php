@@ -40,75 +40,21 @@
                 </div>
             </div>
             <div class="row">
-        <div class="col-xl-12">
-            <div class="card-box widget-box-two widget-two-custom">
-                <div class="table-responsive">
-                    <!-- <table class="table mb-0"> -->
-                    <table class="tablesaw table mb-0" data-tablesaw-mode="stack">
-                        <thead id="dashboard_head">
-                            <tr class="bg-dark text-white">
-                                <th scope="col"class="sm-text-right" style="width:250px;" data-tablesaw-sortable-col data-tablesaw-priority="persist">Year</th>
-                                <th style="width:250px;">2023</th>
-                                <th ></th>
-                            </tr>
-                        </thead>
-                        <tbody id="dashboard_body">
-                            <tr class="table-active">
-                                <th class="sm-text-right bg-dark text-white" scope="row" style="white-space:nowrap;">Total</th>
-                                <td>3787348</td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="col-xl-12">
+                    <div class="card-box widget-box-two widget-two-custom">
+                        <div class="table-responsive">
+                            <!-- <table class="table mb-0"> -->
+                            <table class="tablesaw table mb-0" data-tablesaw-mode="stack">
+                                <thead id="dashboard_head">
+                                </thead>
+                                <tbody id="dashboard_body">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
             <!-- end row -->
-            <div class="row justify-content-center">
-                <div class="col-md-6 col-xl-3">
-                    <div class="card-box widget-box-two widget-two-custom">
-                        <div class="media">
-                            <div class="avatar-lg rounded-circle bg-primary widget-two-icon align-self-center">
-                                <i class="fas fa-shopping-cart avatar-title font-30 text-white"></i>
-                            </div>
-            
-                            <div class="wigdet-two-content media-body">
-                                <h4 class="mt-0 font-16 mb-1 text-overflow" title="Total Orders">Total Orders</h4>
-                                <h3 class="mb-0 mt-4"><span data-plugin="counterup" class="is-loading" id="db_total_order"></span></h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-3">
-                    <div class="card-box widget-box-two widget-two-custom">
-                        <div class="media">
-                            <div class="avatar-lg rounded-circle bg-primary widget-two-icon align-self-center">
-                                <i class="fas fa-hourglass-half avatar-title font-30 text-white"></i>
-                            </div>
-            
-                            <div class="wigdet-two-content media-body">
-                                <h4 class="mt-0 font-16 mb-1 text-overflow" title="Pending Orders">Pending Orders</h4>
-                                <h3 class="mb-0 mt-4"><span data-plugin="counterup" class="is-loading" id="db_pending_order"></span></h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-3">
-                    <div class="card-box widget-box-two widget-two-custom">
-                        <div class="media">
-                            <div class="avatar-lg rounded-circle bg-primary widget-two-icon align-self-center">
-                                <i class="fas fa-money-bill-alt avatar-title font-30 text-white"></i>
-                            </div>
-            
-                            <div class="wigdet-two-content media-body">
-                                <h4 class="mt-0 font-16 mb-1 text-overflow" title="Pending Amount">Pending Amount</h4>
-                                <h3 class="mb-0 mt-4">$ <span data-plugin="counterup" class="is-loading" id="db_pending_amount"></span></h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-xl-12 col-lg-12">
                     <div class="card-box">

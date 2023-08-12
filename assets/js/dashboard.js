@@ -49,9 +49,9 @@ function loaddashboard(){
 
                     // panel Boxes
                     // console.log(data['total_order']);
-                    $("#db_total_order").html(data['total_order']);
-                    $("#db_pending_order").html(data['pending_order']);
-                    $("#db_pending_amount").html(data['pending_amount']);
+                    // $("#db_total_order").html(data['total_order']);
+                    // $("#db_pending_order").html(data['pending_order']);
+                    // $("#db_pending_amount").html(data['pending_amount']);
                     //latest design
                     if (latest_design != null) {
                         var image_path = profile_data['product_image_path'];
