@@ -32,8 +32,8 @@
     <!-- Responsive Table css -->
     <!-- <link href="assets/libs/rwd-table/rwd-table.min.css" rel="stylesheet" type="text/css" /> -->
     
+    <link href="assets/libs/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" >
     <?php if($pagename == "catalog"){ ?>
-        <link href="assets/libs/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" >
         <link type="text/css" href="assets/css/dataTables.checkboxes.css" rel="stylesheet" />
     <?php } if($pagename == "custom_design"){ ?>
         <link type="text/css" href="assets/libs/dropzone/dropzone.min.css" rel="stylesheet" />

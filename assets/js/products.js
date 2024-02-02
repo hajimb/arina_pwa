@@ -55,7 +55,7 @@ function loadPageData(){
 function FillCombo(){
     // console.log(`Fill Combo index`);
     $("#category").empty();
-    $("#category").append('<option value="0" selected="selected">Select Category</option>');
+    // $("#category").append('<option value="0" selected="selected">Select Category</option>');
     $.each(categories, function(i) {
       var opt = $('<option />');
     //   console.log('inside each :' + this.price);
@@ -63,7 +63,7 @@ function FillCombo(){
       opt.text(categories[i]);
       $("#category").append(opt);
     });
-    // $("#category").selectpicker('refresh');
+    $("#category").selectpicker('refresh');
     // console.log(`Fill Combo ended`);
     return true;
 }
@@ -91,8 +91,9 @@ function loadProducts(flg){
             //     categories[category] = category;
             // }
             // console.log(srh_category, category );
-            if(srh_category != 0 && srh_category != category && flg == false){
-                // console.log('true');
+//            if(srh_category != 0 && srh_category != category && flg == false){
+            if(srh_category.length > 0 && $.inArray(category, srh_category) === -1  && flg == false){
+                    // console.log('true');
                 flag = false;
             }
             if(srh_style_no != '' && style_no.indexOf(srh_style_no) == -1 && flg == false){

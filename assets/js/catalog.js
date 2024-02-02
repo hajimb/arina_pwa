@@ -25,6 +25,21 @@ $(document).ready(function () {
         calllist();
         // console.log(table)
         loadPageData(true);
+        // var selectpickerInstance = $('#category');
+
+        // // Add a click event handler to optgroup labels
+        // $('.optgroup').on('click', function() {
+        //     var optgroupLabel = $(this).data('optgroup');
+
+        //     // Find options within the clicked optgroup
+        //     var optionsInOptgroup = $('option[data-optgroup="' + optgroupLabel + '"]');
+
+        //     // Toggle the selected state of options within the optgroup
+        //     optionsInOptgroup.each(function() {
+        //     var optionValue = $(this).val();
+        //     selectpickerInstance.selectpicker('toggleOption', optionValue);
+        //     });
+        // });
     } else {
         window.location = 'login';
     }
@@ -141,7 +156,7 @@ function FillCombo(){
     // console.log(`Fill Combo index`);
     // console.log(categories);
     $("#category").empty();
-    $("#category").append('<option value="0" selected="selected">Select Category</option>');
+    // $("#category").append('<option value="0" selected="selected">Select Category</option>');
     $.each(categories, function(i) {
       var opt = $('<option />');
     //   console.log('inside each :' + categories[i]);
@@ -228,8 +243,8 @@ function loadProducts(flg){
             var style_no    = value['style_no'];
             
             // console.log(srh_category, category );
-            if(srh_category != 0 && srh_category != category && flg == false){
-                // console.log(' srh_category true');
+            if(srh_category.length > 0 && $.inArray(category, srh_category) === -1  && flg == false){
+                // console.log('srh_category true for ',category);
                 flag = false;
             }
             // console.log(srh_style_no, style_no );

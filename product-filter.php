@@ -10,9 +10,9 @@
                         <!-- Choose Category -->
                         <div class="col-md-2 col-sm-12 col-xs-12 mb-1">
                             <label>Category</label>
-                            <select id="category" class="form-control checkbtn selectpicker" data-live-search="true"
+                            <select id="category" class="form-control checkbtn selectpicker" multiple data-live-search="true"
                                 data-style="btn-outline-primary" title="Select Category">
-                                <option value="0" selected>Select Category</option>
+                                <!-- <option value="0" selected>Select Category</option> -->
                             </select>
                         </div>
                         <div class="col-md-2 col-sm-12 col-xs-12 mb-1">

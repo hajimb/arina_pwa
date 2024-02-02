@@ -161,7 +161,7 @@ function removeloader(){
 //Filter in Product and Catalog page
 $(document).on('change', ".checkbtn", function () {
     $(".search_btn").prop('disabled', true);
-    if($("#category").val() != 0){
+    if($("#category").val().length > 0){
         $(".search_btn").prop('disabled', false);
     }else if($("#style_no").val() != ''){
         $(".search_btn").prop('disabled', false);
