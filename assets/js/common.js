@@ -175,6 +175,7 @@ $(document).on('click', "#clear_btn", function () {
     $("#filter").val(0);
     $("#min_value").val(0);
     $("#max_value").val(0);
+    $("#category").selectpicker('refresh');
     loadProducts(true);
 });
 
